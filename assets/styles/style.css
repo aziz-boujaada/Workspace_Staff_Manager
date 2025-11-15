@@ -1,4 +1,4 @@
-button{
+button {
     background-color: rgb(31, 31, 228);
     padding: 3;
     border-radius: 20px;
@@ -6,3 +6,24 @@ button{
     border: none;
     color: white;
 }
+
+#rooms {
+
+
+    position: relative;
+    display: grid;
+    align-items: center;
+     justify-content: center;
+    grid-template-columns: 40% 1fr 1fr; 
+    grid-template-rows: 20% 1fr 1fr;
+    grid-template-areas:
+        "conference_room serveur_room securete_room"
+        "reception_room personell_room  archives_room ";
+}
+
+#conference_room { grid-area: conference_room;   }
+#serveur_room {grid-area: serveur_room;}
+#securete_room { grid-area: securete_room; }
+#reception_room { grid-area: reception_room; }
+#personell_room { grid-area: personell_room; }
+#archives_room { grid-area: archives_room; }
