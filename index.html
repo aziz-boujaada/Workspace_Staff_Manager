@@ -30,7 +30,7 @@
      </div>
      <!--Form Modal-->
      <div id="form_modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-  <form class="bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 ">
+  <form id="form" class= "bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 ">
      <div class="text-right">
       <button id="close_modal" class="bg-gray-300 p-1 rounded-md hover:text-red-600"><i class="fa-solid fa-xmark"></i></button>
      </div>
@@ -56,15 +56,24 @@
       <label for="img_url" class="font-medium text-gray-700">Image URL</label>
       <input type="url" id="img_url" placeholder="image url" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
     </div>
+    <div class="flex flex-col gap-1">
+      <label for="email" class="font-medium text-gray-700">Email</label>
+      <input type="email" id="email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="phone" class="font-medium text-gray-700">PhoneL</label>
+      <input type="text" id="phone" placeholder="+212612345678" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+    </div>
+  
     <!--experience-->
-    <div id="experience_form" class="space-y-3 border-t pt-4">
+    <div id="experience_form" class="space-y-3 border-t pt-4 bg-gray-100 rounded-md shadow-xl p-2 mt-2">
       <h3 class="text-lg font-semibold text-gray-800">Experience</h3>
 
       <div class="flex flex-col gap-1">
         <label for="company_name" class="font-medium text-gray-700">Company Name</label>
         <input type="text" id="company_name" placeholder="Company name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
       </div>
-
+      
       <div class="flex flex-col gap-1">
         <label for="exp_role" class="font-medium text-gray-700">Role</label>
         <input type="text" id="exp_role" placeholder="Role..." class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
@@ -82,10 +91,6 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-1">
-        <label for="email" class="font-medium text-gray-700">Email</label>
-        <input type="email" id="email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      </div>
 
       <button type="button" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition">+ Add experience</button>
     </div>
