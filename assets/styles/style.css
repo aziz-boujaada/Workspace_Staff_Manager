@@ -33,9 +33,6 @@ button {
 #archives_room { grid-area: archives_room; ; }
 
 
-@media(max-withd : 768px){
- .image_zones{
-    max-width: 600px;
-   
-   }
+.hidden_modal{
+    display: none;
 }

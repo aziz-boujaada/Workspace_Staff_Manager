@@ -17,7 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-700">
-    <main class="">
+    <main class=" relative">
       <!--side bar and rooms div-->
       <div class="flex flex-col lg:flex-row gap-3">
      <!--Side Bar unssigned workers-->
@@ -27,6 +27,75 @@
        </div>
        <button class="text-center w-full my-4 mx-auto bg-blue-700 px-3 py-2 border-none rounded-md shadow-md text-white font-sans font-semibold hover:bg-blue-500 transition-all">Add Worker +</button>
      </div>
+     <!--Form Modal-->
+     <div id="form_modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden_modal">
+  <form class="bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 ">
+     <div class="text-right">
+      <button id="close_modal" class="bg-gray-300 p-1 rounded-md hover:text-red-600"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+    <h2 class="text-2xl font-semibold text-blue-700 text-center mb-3">Add New Worker</h2>
+
+    <div class="flex flex-col gap-1">
+      <label for="worker_name" class="font-medium text-gray-700">Name</label>
+      <input type="text" id="worker_name" placeholder="Enter worker name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="role" class="font-medium text-gray-700">Role</label>
+      <select id="role" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none">
+        <option value="reception">Reception</option>
+        <option value="it_guy">IT Guy</option>
+        <option value="securete">Security</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="img_url" class="font-medium text-gray-700">Image URL</label>
+      <input type="url" id="img_url" placeholder="image url" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+    </div>
+
+    <div id="experience_form" class="space-y-3 border-t pt-4">
+      <h3 class="text-lg font-semibold text-gray-800">Experience</h3>
+
+      <div class="flex flex-col gap-1">
+        <label for="company_name" class="font-medium text-gray-700">Company Name</label>
+        <input type="text" id="company_name" placeholder="Company name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="exp_role" class="font-medium text-gray-700">Role</label>
+        <input type="text" id="exp_role" placeholder="Role..." class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-1">
+          <label for="from_date" class="font-medium text-gray-700">From</label>
+          <input type="date" id="from_date" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="to_date" class="font-medium text-gray-700">To</label>
+          <input type="date" id="to_date" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="email" class="font-medium text-gray-700">Email</label>
+        <input type="email" id="email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      </div>
+
+      <button type="button" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition">+ Add experience</button>
+    </div>
+
+    <div class="flex items-center justify-between pt-4">
+      <button type="button" id="close_modal" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition">Cancel</button>
+      <button class="px-4 py-2 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-600 transition">Save Worker</button>
+    </div>
+
+  </form>
+</div>
      <!--rooms / zone image-->
      <div id="all_rooms" class=" image_zones bg-[url('/assets/images/image.jpg')] bg-cover bg-no-repeat bg-center h-screen w-full ">
        <!-- rooms -->
