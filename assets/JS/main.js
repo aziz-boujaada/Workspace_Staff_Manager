@@ -1,5 +1,5 @@
 //import functions
-import { addWorker , renderWorkerInfo } from "./crud.js";
+import { addWorker , renderWorkerInfo ,addWorkerExperinece } from "./crud.js";
 import { clearForm } from "./ui.js";
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
@@ -22,17 +22,6 @@ OpenModal()
 
 //add new worker
 
-//worker exp
-const companyName = document.getElementById("company_name").value;
-const expRole = document.getElementById("exp_role").value;
-const fromDate = document.getElementById("from_date").value;
-const ToDate = document.getElementById("to_date").value;
-const workerExperience = {
-  companyName: companyName,
-  expRole: expRole,
-  fromDate: fromDate,
-  todate: ToDate,
-};
 
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
@@ -50,9 +39,21 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
     img: imageUrl,
     email: email,
     phone : phone
-    };
+  };
+  //worker exp
+  const companyName = document.getElementById("company_name").value;
+  const expRole = document.getElementById("exp_role").value;
+  const fromDate = document.getElementById("from_date").value;
+  const ToDate = document.getElementById("to_date").value;
+  const ExperienceData = {
+    companyName: companyName,
+    expRole: expRole,
+    fromDate: fromDate,
+    todate: ToDate,
+  };
     e.preventDefault()
     addWorker(workerInfo);
+    addWorkerExperinece(ExperienceData)
     clearForm()
     closeModal()
     renderWorkerInfo()

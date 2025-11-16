@@ -12,6 +12,11 @@ function addWorker(Info){
   console.log("worker info" , workers)
   SvaeWorkerLocalstorage()
 }
+//add worker experience
+function addWorkerExperinece(ExperienceData){
+ workers.workerExper.push(ExperienceData)
+ SvaeWorkerLocalstorage()
+}
 //render workers info
 function renderWorkerInfo(){
   const unssignedWorkersZone = document.getElementById("unssigned_workers")
@@ -34,4 +39,4 @@ function renderWorkerInfo(){
 function SvaeWorkerLocalstorage(){
     localStorage.setItem("worker" , JSON.stringify(workers))
 }
-export{addWorker , renderWorkerInfo}
+export{addWorker ,addWorkerExperinece, renderWorkerInfo}
