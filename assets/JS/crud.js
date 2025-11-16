@@ -15,6 +15,7 @@ function addWorker(Info){
 //add worker experience
 function addWorkerExperinece(ExperienceData){
  workers.workerExper.push(ExperienceData)
+ console.log("workers",workers.workerExper)
  SvaeWorkerLocalstorage()
 }
 //render workers info

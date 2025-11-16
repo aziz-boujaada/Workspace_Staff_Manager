@@ -1,6 +1,6 @@
 //import functions
 import { addWorker , renderWorkerInfo ,addWorkerExperinece } from "./crud.js";
-import { clearForm } from "./ui.js";
+import { clearForm ,renderExperienceForm } from "./ui.js";
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
 const closeModalBtn = document.getElementById("close_modal");
@@ -26,6 +26,7 @@ OpenModal()
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
 saveWorkerBtn.addEventListener("click" , (e)=>{
+  e.preventDefault()
   //worker info
   const workerName = document.getElementById("worker_name").value;
   const role = document.getElementById("role").value;
@@ -41,21 +42,26 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
     phone : phone
   };
   //worker exp
-  const companyName = document.getElementById("company_name").value;
-  const expRole = document.getElementById("exp_role").value;
-  const fromDate = document.getElementById("from_date").value;
-  const ToDate = document.getElementById("to_date").value;
-  const ExperienceData = {
-    companyName: companyName,
-    expRole: expRole,
-    fromDate: fromDate,
-    todate: ToDate,
-  };
+  const expValues = document.getElementsByClassName("exp_items")
+  for(let expVal of expValues){
+    const companyName = expVal.querySelector(".company_name").value
+    const expRole = expVal.querySelector(".exp_role").value;
+    const fromDate = expVal.querySelector(".from_date").value;
+    const ToDate = expVal.querySelector(".to_date").value;
+    const ExperienceData = {
+      companyName , 
+      expRole,
+      fromDate,
+      ToDate,
+    };
+    
+
+    addWorkerExperinece(ExperienceData)
+  }
     e.preventDefault()
     addWorker(workerInfo);
-    addWorkerExperinece(ExperienceData)
+    renderWorkerInfo()
     clearForm()
     closeModal()
-    renderWorkerInfo()
 })
 
