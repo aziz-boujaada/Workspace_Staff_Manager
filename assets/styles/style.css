@@ -33,6 +33,6 @@ button {
 #archives_room { grid-area: archives_room; ; }
 
 
-.hidden_modal{
+/* .hidden_modal{
     display: none;
-}
+} */
