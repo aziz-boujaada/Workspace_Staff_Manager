@@ -10,20 +10,32 @@ button {
 #rooms {
 
 
-    position: relative;
+
     display: grid;
-    align-items: center;
-     justify-content: center;
-    grid-template-columns: 40% 1fr 1fr; 
-    grid-template-rows: 20% 1fr 1fr;
+    grid-template-columns:2fr 1fr 1fr 1fr r; 
+    grid-template-rows: 2fr 1fr 1fr;
     grid-template-areas:
-        "conference_room serveur_room securete_room"
-        "reception_room personell_room  archives_room ";
+        "conference_room conference_room empty_div1 serveur_room securete_room"
+        "reception_room reception_room empty_div2 empty_div3 empty_div4 "
+        "reception_room reception_room empty_div5  personell_room  archives_room ";
 }
 
 #conference_room { grid-area: conference_room;   }
+.empty_div1{ grid-area: empty_div1;}
 #serveur_room {grid-area: serveur_room;}
 #securete_room { grid-area: securete_room; }
 #reception_room { grid-area: reception_room; }
+.empty_div2{ grid-area: empty_div2;}
+.empty_div3{ grid-area: empty_div3;}
+.empty_div4{ grid-area: empty_div4;}
+.empty_div5{ grid-area: empty_div5;}
 #personell_room { grid-area: personell_room; }
-#archives_room { grid-area: archives_room; }
+#archives_room { grid-area: archives_room; ; }
+
+
+@media(max-withd : 768px){
+ .image_zones{
+    max-width: 600px;
+   
+   }
+}
