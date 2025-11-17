@@ -21,7 +21,7 @@
       <!--side bar and rooms div-->
       <div class="flex flex-col lg:flex-row gap-3">
      <!--Side Bar unssigned workers-->
-     <div id="side_bar" class="  bg-slate-50 sm:max-w-xl lg:w-[400px] h-auto p-4 shadow-xl rounded-lg">
+     <div id="side_bar" class="  bg-slate-50 sm:max-w-xl lg:w-[30%] h-auto p-4 shadow-xl rounded-lg">
        <div>
         <h1 class="text-blue-700 text-2xl text-center font-semibold font-sans">Workspace Staff Manager</h1>
        </div>
@@ -32,14 +32,14 @@
      <div id="form_modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
   <form id="form" class= "bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 ">
      <div class="text-right">
-      <button id="close_modal" class="bg-gray-300 p-1 rounded-md hover:text-red-600"><i class="fa-solid fa-xmark"></i></button>
+      <button id="close_modal" type="button" class="bg-gray-300 p-1 rounded-md hover:text-red-600"><i class="fa-solid fa-xmark"></i></button>
      </div>
     <h2 class="text-2xl font-semibold text-blue-700 text-center mb-3">Add New Worker</h2>
 
     <div class="flex flex-col gap-1">
-      <label for="worker_name" class="font-medium text-gray-700">Name</label>
-      <input type="text" id="worker_name" placeholder="Enter worker name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div class="worker-name-error erroe" ></div>
+      <label for="worker name" class="font-medium text-gray-700">Name</label>
+      <input type="text" id="worker-name" placeholder="Enter worker name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      <div id="worker-name-error" class=" error hidden" ></div>
     </div>
 
     <div class="flex flex-col gap-1">
@@ -54,25 +54,25 @@
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for="img_url" class="font-medium text-gray-700">Image URL</label>
-      <input type="url" id="img_url" placeholder="image url" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div class="img-url-error error" ></div>
+      <label for="img  url" class="font-medium text-gray-700">Image URL</label>
+      <input type="url" id="img-url" placeholder="image url" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      <div id="img-url-error" class=" error hidden" ></div>
     </div>
     <div class="flex flex-col gap-1">
       <label for="email" class="font-medium text-gray-700">Email</label>
-      <input type="email" id="email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div class="worker-email-error error" ></div>
+      <input type="email" id="worker-email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      <div id="worker-email-error" class=" error hidden" ></div>
     </div>
     <div class="flex flex-col gap-1">
       <label for="phone" class="font-medium text-gray-700">PhoneL</label>
-      <input type="text" id="phone" placeholder="+212612345678" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div class="worker-phone-error error" ></div>
+      <input type="text" id="worker-phone" placeholder="+212612345678" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
+      <div id="worker-phone-error" class=" error hidden" ></div>
     </div>
   
     <!--experience form-->
      <div id="expForm"></div>
    
-    <button type="button" id="add_exp" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition">+ Add experience</button>
+    <button type="button" id="add_exp" class=" mt-4 w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition">+ Add experience</button>
 
     <div class="flex items-center justify-between pt-4">
       <button type="button" id="cancel" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition">Cancel</button>

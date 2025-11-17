@@ -32,6 +32,10 @@ button {
 #personell_room { grid-area: personell_room; }
 #archives_room { grid-area: archives_room; ; }
 
+.error{
+    font-size: 12px;
+    color: red;
+}
 
 /* .hidden_modal{
     display: none;

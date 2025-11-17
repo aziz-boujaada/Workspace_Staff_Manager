@@ -1,6 +1,7 @@
 //import functions
-import { addWorker , renderWorkerInfo ,addWorkerExperinece } from "./crud.js";
-import { clearForm ,renderExperienceForm } from "./ui.js";
+import { addWorker , renderWorkerInfo , loadWorkers} from "./crud.js";
+import { clearForm ,renderExperienceForm , } from "./ui.js";
+import { validateForm } from "./ValidationForm.js";
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
 const closeModalBtn = document.getElementById("close_modal");
@@ -19,30 +20,51 @@ function closeModal(){
 
 }
 OpenModal()
-
+closeModal()
 //add new worker
 
-
+document.addEventListener("DOMContentLoaded",()=>{
+  const loadedWorkers = loadWorkers()
+  renderWorkerInfo(loadedWorkers)
+})
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
 saveWorkerBtn.addEventListener("click" , (e)=>{
   e.preventDefault()
   //worker info
-  const workerName = document.getElementById("worker_name").value;
+  const workerName = document.getElementById("worker-name").value;
   const role = document.getElementById("role").value;
-  const imageUrl = document.getElementById("img_url").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
+  const imageUrl = document.getElementById("img-url").value;
+  const email = document.getElementById("worker-email").value;
+  const phone = document.getElementById("worker-phone").value;
   const workerInfo = {
     id : new Date().getTime().toString(),
     workerName: workerName,
     role: role,
     img: imageUrl,
     email: email,
-    phone : phone
+    phone : phone,
+    experiences : getExperiences() 
   };
-  //worker exp
+ 
+    
+    
+
+    if(!validateForm())return
+    addWorker(workerInfo);
+    
+    renderWorkerInfo(loadWorkers())
+    clearForm()
+        formModal.classList.add("hidden");
+    // closeModal()
+})
+  
+
+
+function getExperiences(){
+   //worker exp
   const expValues = document.getElementsByClassName("exp_items")
+  const expArray = []
   for(let expVal of expValues){
     const companyName = expVal.querySelector(".company_name").value
     const expRole = expVal.querySelector(".exp_role").value;
@@ -54,14 +76,9 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
       fromDate,
       ToDate,
     };
+    expArray.push(ExperienceData)
     
-
-    addWorkerExperinece(ExperienceData)
-  }
-    e.preventDefault()
-    addWorker(workerInfo);
-    renderWorkerInfo()
-    clearForm()
-    closeModal()
-})
+}
+return expArray
+}
 
