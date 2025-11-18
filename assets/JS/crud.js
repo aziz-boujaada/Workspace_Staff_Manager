@@ -1,6 +1,4 @@
 
-
- 
 function loadWorkers(){
  const workers =  localStorage.getItem("worker")
  return workers ? JSON.parse(workers) : []
@@ -28,7 +26,7 @@ function renderWorkerInfo(workers){
   const unssignedWorkersZone = document.getElementById("unssigned_workers")
   unssignedWorkersZone.innerHTML = ""
   for(let worker of workers){unssignedWorkersZone.innerHTML += `
-     <div class="flex item-center justify-around bg-gray-200 p-2 rounded-md my-3 listing" data-id="${worker.id}">
+     <div id = "" class="worker_card flex item-center justify-around bg-gray-200 p-2 rounded-md my-3 listing" data-id="${worker.id}">
      <img src = ${worker.img} alt ="${worker.workerName}image" class="h-12 w-12 rounded-full">
      <div>
      <h2>${worker.workerName}</h2>
@@ -63,8 +61,12 @@ function deletWorker(id){
     localStorage.setItem("worker" , JSON.stringify(workers))
 }
 
+function getWorker(id){
+  let worker = loadWorkers()
+  return worker = worker.find(worker => worker.id == id  )
+  
+}
 
 
 
-
-export{addWorker , renderWorkerInfo ,loadWorkers}
+export{addWorker , renderWorkerInfo ,loadWorkers ,getWorker }

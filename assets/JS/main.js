@@ -1,6 +1,6 @@
 //import functions
-import { addWorker , renderWorkerInfo , loadWorkers} from "./crud.js";
-import { clearForm ,renderExperienceForm , } from "./ui.js";
+import { addWorker , renderWorkerInfo , loadWorkers } from "./crud.js";
+import { clearForm ,renderExperienceForm, renderWorkerModal  } from "./ui.js";
 import { validateForm } from "./ValidationForm.js";
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
@@ -26,6 +26,7 @@ closeModal()
 document.addEventListener("DOMContentLoaded",()=>{
   const loadedWorkers = loadWorkers()
   renderWorkerInfo(loadedWorkers)
+     renderWorkerModal()
 })
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
@@ -46,7 +47,8 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
     phone : phone,
     experiences : getExperiences() 
   };
- 
+  
+  
     
     
 
