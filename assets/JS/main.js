@@ -2,6 +2,7 @@
 import { addWorker , renderWorkerInfo , loadWorkers } from "./crud.js";
 import { clearForm ,renderExperienceForm, renderWorkerModal  } from "./ui.js";
 import { validateForm } from "./ValidationForm.js";
+import { assignWorkers } from "./assignWorkers.js";
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
 const closeModalBtn = document.getElementById("close_modal");
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const loadedWorkers = loadWorkers()
   renderWorkerInfo(loadedWorkers)
      renderWorkerModal()
+     assignWorkers()
 })
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
