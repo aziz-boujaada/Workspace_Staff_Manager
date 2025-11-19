@@ -5,7 +5,7 @@ const validationRules = {
     },
 
     'img-url': {
-        regex: /^https:\/\/[\w.]+\.(png|jpg|jpeg|gif|svg|webp)$/,
+        regex: /^https?:\/\/.+\..+$/i,
         message: "Please enter a valid image URL."
     },
 

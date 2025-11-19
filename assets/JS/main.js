@@ -47,7 +47,8 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
     img: imageUrl,
     email: email,
     phone : phone,
-    experiences : getExperiences() 
+    experiences : getExperiences() ,
+    isAssingend : false,
   };
   
   

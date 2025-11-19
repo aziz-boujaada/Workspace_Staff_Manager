@@ -1,149 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A modern, responsive web application for managing staff assignments across different office zones.">
-    <meta name="author" content="aziz boujaada">
-    <meta name="keywords" content="staff manger workspace ">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A modern, responsive web application for managing staff assignments across different office zones."
+    />
+    <meta name="author" content="aziz boujaada" />
+    <meta name="keywords" content="staff manger workspace " />
     <title>Workspace staff Manger</title>
 
-    <link rel="icon" type="image" href="./assets/images/icons8-staff-96.png">
-     <link rel="stylesheet" href="assets/styles/style.css" />
+    <link rel="icon" type="image" href="./assets/images/icons8-staff-96.png" />
+    <link rel="stylesheet" href="assets/styles/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-700">
-    <main class=" relative">
+  </head>
+  <body class="bg-slate-700">
+    <main class="relative">
       <!--side bar and rooms div-->
       <div class="flex flex-col lg:flex-row gap-3">
-     <!--Side Bar unssigned workers-->
-     <div id="side_bar" class="  bg-slate-50 sm:max-w-xl lg:w-[30%] h-auto p-4 shadow-xl rounded-lg">
-       <div>
-        <h1 class="text-blue-700 text-2xl text-center font-semibold font-sans">Workspace Staff Manager</h1>
-       </div>
-       <div id ="unssigned_workers"></div>
-       <button id="open_Modal" class="text-center w-full my-4 mx-auto bg-blue-700 px-3 py-2 border-none rounded-md shadow-md text-white font-sans font-semibold hover:bg-blue-500 transition-all">Add Worker +</button>
-     </div>
-     <!--Form Modal-->
-     <div id="form_modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-  <form id="form" class= "bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 ">
-     <div class="text-right">
-      <button id="close_modal" type="button" class="bg-gray-300 p-1 rounded-md hover:text-red-600"><i class="fa-solid fa-xmark"></i></button>
-     </div>
-    <h2 class="text-2xl font-semibold text-blue-700 text-center mb-3">Add New Worker</h2>
-
-    <div class="flex flex-col gap-1">
-      <label for="worker name" class="font-medium text-gray-700">Name</label>
-      <input type="text" id="worker-name" placeholder="Enter worker name" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div id="worker-name-error" class=" error hidden" ></div>
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="role" class="font-medium text-gray-700">Role</label>
-      <select id="role" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none">
-        <option value="Reception">Reception</option>
-        <option value="IT Guy">IT Guy</option>
-        <option value="Security">Security</option>
-        <option value="Cleaning">Cleaning</option>
-        <option value="manager">Manager</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="img  url" class="font-medium text-gray-700">Image URL</label>
-      <input type="url" id="img-url" placeholder="image url" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div id="img-url-error" class=" error hidden" ></div>
-    </div>
-    <div class="flex flex-col gap-1">
-      <label for="email" class="font-medium text-gray-700">Email</label>
-      <input type="email" id="worker-email" placeholder="example@mail.com" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div id="worker-email-error" class=" error hidden" ></div>
-    </div>
-    <div class="flex flex-col gap-1">
-      <label for="phone" class="font-medium text-gray-700">PhoneL</label>
-      <input type="text" id="worker-phone" placeholder="+212612345678" class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
-      <div id="worker-phone-error" class=" error hidden" ></div>
-    </div>
-  
-    <!--experience form-->
-     <div id="expForm"></div>
-   
-    <button type="button" id="add_exp" class=" mt-4 w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition">+ Add experience</button>
-
-    <div class="flex items-center justify-between pt-4">
-      <button type="button" id="cancel" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition">Cancel</button>
-      <button id="save_worker" class="px-4 py-2 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-600 transition">Save Worker</button>
-    </div>
-
-  </form>
-</div>
-     <!--rooms / zone image-->
-     <div id="all_rooms" class=" image_zones bg-[url('/assets/images/image.jpg')] bg-cover bg-no-repeat bg-center h-screen w-full ">
-       <!-- rooms -->
-        <div id="rooms" class="gap-x-10">
-          <div id="conference_room" class=" w-full h-[200px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-2 left-2 w-1/2 text-center ">
-    Conference Room<i class="fa-solid fa-users pl-2"></i>
-  </h3>
-   <button id="add_conference" class="absolute bottom-0 right-4 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
-
-<div class="empty_div1"></div>
-
-<div id="serveur_room" class=" w-full h-[250px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-2 left-2 w-full text-center ">
-    Serveur Room<i class="fa-solid fa-server pl-2"></i>
-  </h3>
-  <button id="add_serveur" class="absolute bottom-2 right-2 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
-
-<div id="securete_room" class=" w-full h-[250px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-2  w-full text-center ">
-    Securete Room<i class="fa-solid fa-shield-halved pl-2"></i>
-  </h3>
-  <button id="add_securete" class="absolute bottom-2 right-2 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
-
-<div id="reception_room" class=" w-full h-[400px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-[-60%] left-2 w-1/2 text-center ">
-    Reception Room<i class="fa-solid fa-door-open pl-2"></i>
-  </h3>
-  <button id="add_reception" class="absolute top-[40%] right-4 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
-
-<div class="empty_div2"></div>
-<div class="empty_div3"></div>
-<div class="empty_div4"></div>
-<div class="empty_div5"></div>
-
-<div id="personell_room" class=" w-full h-[250px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-[-100%] left-2 w-full text-center ">
-    Personell Room<i class="fa-solid fa-user-tie pl-2"></i>
-  </h3>
-  <button id="add_personell" class="absolute top-[-20%] right-2 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
-</div>
-
-<div id="archives_room" class=" w-full h-[250px] rounded-lg relative">
-  <h3 class="absolute bg-blue-600 text-white p-0.5 rounded-full top-[-500px] right-0 w-1/6 text-center ">
-    Archives Room<i class="fa-solid fa-archive pl-2"></i>
-  </h3>
-  <button id="add_archives" class="absolute top-[-120%] right-2 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center">+</button>
-</div>
+        <!--Side Bar unssigned workers-->
+        <div
+          id="side_bar"
+          class="bg-slate-50 sm:max-w-xl lg:w-[30%] h-auto p-4 shadow-xl rounded-lg"
+        >
+          <div>
+            <h1
+              class="text-blue-700 text-2xl text-center font-semibold font-sans"
+            >
+              Workspace Staff Manager
+            </h1>
+          </div>
+          <div id="unssigned_workers"></div>
+          <button
+            id="open_Modal"
+            class="text-center w-full my-4 mx-auto bg-blue-700 px-3 py-2 border-none rounded-md shadow-md text-white font-sans font-semibold hover:bg-blue-500 transition-all"
+          >
+            Add Worker +
+          </button>
         </div>
-     </div>
-  </div>
+        <!--Form Modal-->
+        <div
+          id="form_modal"
+          class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden"
+        >
+          <form
+            id="form"
+            class="bg-white w-[95%] sm:w-[500px] max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6"
+          >
+            <div class="text-right">
+              <button
+                id="close_modal"
+                type="button"
+                class="bg-gray-300 p-1 rounded-md hover:text-red-600"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <h2 class="text-2xl font-semibold text-blue-700 text-center mb-3">
+              Add New Worker
+            </h2>
 
+            <div class="flex flex-col gap-1">
+              <label for="worker name" class="font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="worker-name"
+                placeholder="Enter worker name"
+                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <div id="worker-name-error" class="error hidden"></div>
+            </div>
 
-<!--display worker information modal -->
-  <div id="worker_info_modal" class="fixed inset-0  bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden"></div>
+            <div class="flex flex-col gap-1">
+              <label for="role" class="font-medium text-gray-700">Role</label>
+              <select
+                id="role"
+                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+              >
+                <option value="reception">Reception</option>
+                <option value="it Guy">IT Guy</option>
+                <option value="security">Security</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="manager">Manager</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="img  url" class="font-medium text-gray-700"
+                >Image URL</label
+              >
+              <input
+                type="url"
+                id="img-url"
+                placeholder="image url"
+                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <div id="img-url-error" class="error hidden"></div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label for="email" class="font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                id="worker-email"
+                placeholder="example@mail.com"
+                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <div id="worker-email-error" class="error hidden"></div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label for="phone" class="font-medium text-gray-700"
+                >PhoneL</label
+              >
+              <input
+                type="text"
+                id="worker-phone"
+                placeholder="+212612345678"
+                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <div id="worker-phone-error" class="error hidden"></div>
+            </div>
+
+            <!--experience form-->
+            <div id="expForm"></div>
+
+            <button
+              type="button"
+              id="add_exp"
+              class="mt-4 w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition"
+            >
+              + Add experience
+            </button>
+
+            <div class="flex items-center justify-between pt-4">
+              <button
+                type="button"
+                id="cancel"
+                class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition"
+              >
+                Cancel
+              </button>
+              <button
+                id="save_worker"
+                class="px-4 py-2 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-600 transition"
+              >
+                Save Worker
+              </button>
+            </div>
+          </form>
+        </div>
+        <!--rooms / zone image-->
+        <div
+          id="all_rooms"
+          class="image_zones bg-[url('/assets/images/image.jpg')] bg-cover bg-no-repeat bg-center h-[100vh] w-full"
+        >
+          <!-- rooms -->
+          <div id="rooms" class="gap-x-10 h-screen">
+            <div
+              id="conference_room"
+              class="room w-full h-[200px] rounded-lg relative"
+              data-roomId="conferenceRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-1/2 text-center"
+              >
+                Conference Room<i class="fa-solid fa-users pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+            <div class="emptyDiv1"></div>
+            <div
+              id=" serveur_room"
+              class="room w-full h-[250px] rounded-lg relative"
+              data-roomId="serverRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+              >
+                Serveur Room<i class="fa-solid fa-server pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+            <div class="emptyDiv2"></div>
+
+            <div
+              id="securete_room"
+              class="room w-full h-[250px] rounded-lg relative"
+              data-roomId="securityRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+              >
+                Securete Room<i class="fa-solid fa-shield-halved pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+            <div class="emptyDiv3"></div>
+            <div
+              id="reception_room"
+              class="room w-full h-[100%] rounded-lg relative"
+              data-roomId="receptionRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-1/2 text-center"
+              >
+                Reception Room<i class="fa-solid fa-door-open pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+            <div class="emptyDiv4 h-[250px]"></div>
+            <div class="emptyDiv5 h-[250px]"></div>
+            <div
+              id="personell_room"
+              class="room w-full rounded-lg relative"
+              data-roomId="personnalRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+              >
+                Personell Room<i class="fa-solid fa-user-tie pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+            <div
+              id="archives_room"
+              class="room w-full h-[100%] rounded-lg relative"
+              data-roomId="archiviesRoom"
+            >
+              <h3
+                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+              >
+                Archives Room<i class="fa-solid fa-archive pl-2"></i>
+              </h3>
+              <button
+                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--display worker information modal -->
+      <div
+        id="worker_info_modal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden"
+      ></div>
+
+      <div
+        class="assing_box bg-white w-[95%] sm:w-[500px] max-h-[85vh] overflow-y-auto rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-sans hidden"
+      >
+        <div
+          class="modal_workers_header flex items-center justify-between mb-4"
+        >
+          <h3 class="text-xl font-semibold text-blue-800">Available Workers</h3>
+          <button
+            id="close_assign_modal"
+            type="button"
+            class="close_worker_modal bg-gray-300 p-2 rounded-full hover:bg-red-100 hover:text-red-600 transition"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="aviable_worker_modal" class=""></div>
+      </div>
     </main>
     <script src="./assets/JS/main.js" type="module"></script>
-   
-</body>
+  </body>
 </html>

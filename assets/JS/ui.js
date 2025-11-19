@@ -2,6 +2,7 @@
 
 import { getWorker, loadWorkers } from "./crud.js";
 // import { getWorker } from "./crud.js";
+import { assignWorkers  } from "./assignWorkers.js";
 function clearForm() {
   const Form = document.getElementById("form");
   Form.reset();
@@ -49,7 +50,6 @@ function renderExperienceForm() {
   });
 }
 renderExperienceForm();
-
 function renderWorkerModal() {
   const informationModal = document.getElementById("worker_info_modal");
   const workerCard = document.querySelectorAll(".worker_card");
