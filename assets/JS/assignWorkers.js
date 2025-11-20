@@ -13,7 +13,7 @@ function assignWorkers() {
   const Rooms = [
     {
       roomName: "conferenceRoom",
-      capacity: 6,
+      capacity: 5,
       Workers: [],
       acceptedRolezs: [
         roles.security,
@@ -42,7 +42,7 @@ function assignWorkers() {
     },
     {
       roomName: "receptionRoom",
-      capacity: 10,
+      capacity: 6,
       Workers: [],
       acceptedRolezs: [roles.cleaning, roles.manager, roles.reception],
     },
@@ -61,7 +61,12 @@ function assignWorkers() {
       roomName: "archiviesRoom",
       capacity: 4,
       Workers: [],
-      acceptedRolezs: ["manger", "it guy", "security", "other", "reciption"],
+      acceptedRolezs: [
+        roles.manager,
+        roles.itGuy,
+        roles.itGuy,
+        roles.reception,
+      ],
     },
   ];
 
@@ -162,7 +167,7 @@ function assignWorkers() {
           room.Workers.push(worker);
           console.log("archive room", room.Workers);
         } else {
-          console.log("no place archive");
+          return;
         }
       }
     });
@@ -189,12 +194,12 @@ function assignWorkers() {
         const allowedWorkers = workers.filter((worker) =>
           selectedRoom.acceptedRolezs.includes(worker.role.toLowerCase())
         );
-        console.log("allowed workers" , allowedWorkers)
+        console.log("allowed workers", allowedWorkers);
         allowedWorkers.map((allowed) => {
           // displayInRoom(allowed)
           aviableWorkermodal.innerHTML += `
 
-  <div class=" accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md">
+  <div class=" accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md "   data-workerId="${allowed.id}">
     <div class="">
       <p class="text-lg font-semibold text-gray-800 mb-1">${allowed.workerName}</p>
       <p class="text-gray-600">${allowed.role}</p>
@@ -202,8 +207,9 @@ function assignWorkers() {
     <img src="${allowed.img}" alt="${allowed.workerName}" class="h-12 w-12 rounded-full border-4 border-blue-500 object-cover shadow-md">
   </div>
         `;
-displayInRoom(allowedWorkers ,selectedRoom);
 
+          displayInRoom(allowedWorkers, roomId, selectedRoom);
+          console.log("allowed", allowed);
         });
       }
     });
@@ -217,25 +223,60 @@ displayInRoom(allowedWorkers ,selectedRoom);
   // localStorage.setItem("rooms" , JSON.stringify(Rooms))
 }
 
-function displayInRoom(worker ,selectroom) {
-  const roomToassinged = document.querySelectorAll(".room_assigned")
-  const aloowedWorkerCard = document.querySelectorAll(".accepted_worker_card");
-  aloowedWorkerCard.forEach((card) => {
-    card.addEventListener("click", (e) => {
-       roomToassinged = selectroom
-      if(selectroom){
-        worker.isAssingend = true  ;
-        console.log("is assingned" , worker)
-        roomToassinged.forEach(room => {
-          room.innerHTML = `
-            <h3>${worker.workerName}</h3>
-          `
-        })
+function displayInRoom(allowedWorkers, roomId, selectedRoom) {
+  const cards = document.querySelectorAll(".accepted_worker_card");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const workerId = card.getAttribute("data-workerId");
+      const worker = allowedWorkers.find((w) => w.id == workerId);
+      if(worker.isAssigned){
+        alert("this worker already assigned to other room")
+        return
+      }
+      worker.isAssigned = true;
+
+      const room = document.querySelector(`.room[data-roomId="${roomId}"] .room_assigned`);
+      if (!room) return;
+
+      if (room.querySelectorAll(".assigned_worker").length >= selectedRoom.capacity) {
+        alert("Room is full");
+        return;
       }
 
+      room.innerHTML += `
+        <div class="assigned_worker flex items-center justify-between w-[90%] mb-1 bg-gray-200 p-1 rounded-md" data-card="${worker.id}">
+          <div>
+            <p class="text-sm font-semibold text-gray-800 mb-1">${worker.workerName}</p>
+            <p class="text-gray-600">${worker.role}</p>
+          </div>
+          <img src="${worker.img}" alt="${worker.workerName}" class="h-12 w-12 rounded-full border-4 border-blue-500 object-cover shadow-md">
+          <button class="remove_from_room bg-red-500 p-1 rounded-full">X</button>
+        </div>`;
+
+      const workerCard = document.querySelector(`.worker_card[data-id="${worker.id}"]`);
+      if (workerCard) workerCard.classList.add("hidden");
+
+      card.remove();
+
+      const removeBtn = room.querySelector(`.assigned_worker[data-card="${worker.id}"] .remove_from_room`);
+      removeBtn.addEventListener("click", () => removeFromRoom(worker));
     });
   });
 }
+
+function removeFromRoom(worker) {
+  const assignedWorkerCard = document.querySelector(`.assigned_worker[data-card="${worker.id}"]`);
+  if (assignedWorkerCard) assignedWorkerCard.remove();
+
+  worker.isAssigned = false;
+
+  const workerCard = document.querySelector(`.worker_card[data-id="${worker.id}"]`);
+  if (workerCard) workerCard.classList.remove("hidden");
+  console.log("click")
+}
+
+
 // function loadRooms(){
 //  const rooms =  localStorage.getItem("rooms")
 //  return rooms ? JSON.parse(rooms) : [];
