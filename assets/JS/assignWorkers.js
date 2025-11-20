@@ -15,41 +15,56 @@ function assignWorkers() {
       roomName: "conferenceRoom",
       capacity: 6,
       Workers: [],
-      acceptedRolezs : [roles.security ,roles.itGuy ,roles.cleaning ,roles.manager ,roles.reception]
+      acceptedRolezs: [
+        roles.security,
+        roles.itGuy,
+        roles.cleaning,
+        roles.manager,
+        roles.reception,
+      ],
     },
     {
       roomName: "serverRoom",
       capacity: 4,
       Workers: [],
-      acceptedRolezs : [roles.manager , roles.itGuy , roles.security ,roles.cleaning]
+      acceptedRolezs: [
+        roles.manager,
+        roles.itGuy,
+        roles.security,
+        roles.cleaning,
+      ],
     },
     {
       roomName: "securityRoom",
       capacity: 4,
       Workers: [],
-      acceptedRolezs : [roles.security ,roles.manager]
+      acceptedRolezs: [roles.security, roles.manager],
     },
     {
       roomName: "receptionRoom",
       capacity: 10,
       Workers: [],
-      acceptedRolezs : [roles.cleaning ,roles.manager , roles.reception]
+      acceptedRolezs: [roles.cleaning, roles.manager, roles.reception],
     },
     {
       roomName: "personnalRoom",
       capacity: 4,
       Workers: [],
-      acceptedRolezs : [roles.manager ,roles.itGuy ,roles.cleaning ,roles.security]
+      acceptedRolezs: [
+        roles.manager,
+        roles.itGuy,
+        roles.cleaning,
+        roles.security,
+      ],
     },
     {
       roomName: "archiviesRoom",
       capacity: 4,
       Workers: [],
-      acceptedRolezs : ["manger" ,"it guy" ,  "security" ,"other" , "reciption"]
+      acceptedRolezs: ["manger", "it guy", "security", "other", "reciption"],
     },
   ];
 
-  
   const workers = loadWorkers();
   console.log("worker to assign is loaded", workers);
   // confirenc room
@@ -123,7 +138,6 @@ function assignWorkers() {
           worker.role.toLowerCase() === roles.manager
         ) {
           room.Workers.push(worker);
-      
         }
       }
       //personal room
@@ -155,57 +169,73 @@ function assignWorkers() {
   });
   ///display worker in rooms
 
- const assignBtn = document.querySelectorAll(".assign_btn");
- const assignBox = document.querySelector(".assing_box")
+  const assignBtn = document.querySelectorAll(".assign_btn");
+  const assignBox = document.querySelector(".assing_box");
 
-assignBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  assignBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      if (e.target.closest(".room")) {
+        const roomId = e.target.closest(".room").getAttribute("data-roomId");
+        const aviableWorkermodal = document.getElementById(
+          "aviable_worker_modal"
+        );
+        assignBox.classList.remove("hidden");
+        aviableWorkermodal.innerHTML = "";
 
-    if (e.target.closest(".room")) {
+        const selectedRoom = Rooms.find((room) => room.roomName === roomId);
+        console.log(selectedRoom);
+        if (!selectedRoom) return;
 
-      const roomId = e.target.closest(".room").getAttribute("data-roomId");
-      const aviableWorkermodal = document.getElementById("aviable_worker_modal");
-      assignBox.classList.remove("hidden")
-      aviableWorkermodal.innerHTML = "";
+        const allowedWorkers = workers.filter((worker) =>
+          selectedRoom.acceptedRolezs.includes(worker.role.toLowerCase())
+        );
+        console.log("allowed workers" , allowedWorkers)
+        allowedWorkers.map((allowed) => {
+          // displayInRoom(allowed)
+          aviableWorkermodal.innerHTML += `
 
-      const selectedRoom = Rooms.find(room => room.roomName === roomId);
-      console.log(selectedRoom)
-      if (!selectedRoom) return;
-
-      const allowedWorkers = workers.filter(worker =>
-        selectedRoom.acceptedRolezs.includes(worker.role.toLowerCase())
-      );
-
-      allowedWorkers.map((allowed) => {
-        aviableWorkermodal.innerHTML +=
-          `
-
-  <div class="flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md">
+  <div class=" accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md">
     <div class="">
-      <p class="text-lg font-semibold text-gray-800 mb-1">${
-        allowed.workerName
-      }</p>
+      <p class="text-lg font-semibold text-gray-800 mb-1">${allowed.workerName}</p>
       <p class="text-gray-600">${allowed.role}</p>
     </div>
-    <img src="${allowed.img}" alt="${
-        allowed.workerName
-      }" class="h-12 w-12 rounded-full border-4 border-blue-500 object-cover shadow-md">
+    <img src="${allowed.img}" alt="${allowed.workerName}" class="h-12 w-12 rounded-full border-4 border-blue-500 object-cover shadow-md">
   </div>
         `;
-      });
-    }
+displayInRoom(allowedWorkers ,selectedRoom);
+
+        });
+      }
+    });
   });
-});
-document.getElementById("close_assign_modal").addEventListener("click" , ()=>{
-  assignBox.classList.add("hidden")
-})
- 
-    
-      
+  document
+    .getElementById("close_assign_modal")
+    .addEventListener("click", () => {
+      assignBox.classList.add("hidden");
+    });
 
   // localStorage.setItem("rooms" , JSON.stringify(Rooms))
 }
 
+function displayInRoom(worker ,selectroom) {
+  const roomToassinged = document.querySelectorAll(".room_assigned")
+  const aloowedWorkerCard = document.querySelectorAll(".accepted_worker_card");
+  aloowedWorkerCard.forEach((card) => {
+    card.addEventListener("click", (e) => {
+       roomToassinged = selectroom
+      if(selectroom){
+        worker.isAssingend = true  ;
+        console.log("is assingned" , worker)
+        roomToassinged.forEach(room => {
+          room.innerHTML = `
+            <h3>${worker.workerName}</h3>
+          `
+        })
+      }
+
+    });
+  });
+}
 // function loadRooms(){
 //  const rooms =  localStorage.getItem("rooms")
 //  return rooms ? JSON.parse(rooms) : [];

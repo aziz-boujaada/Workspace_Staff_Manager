@@ -16,8 +16,10 @@ function renderExperienceForm() {
     e.preventDefault();
     displayForm.innerHTML += `
           <div id="experience_form" class=" exp_items border-t pt-4 bg-gray-100 rounded-md shadow-xl p-2 mt-2">
+          <button id="" type="button" class="close_exp_form flex float-end justify-end bg-gray-300 p-2 rounded-full hover:bg-red-100 hover:text-red-600 transition">
+             <i class="fa-solid fa-xmark"></i>
+        </button> 
       <h3 class="text-lg font-semibold text-gray-800">Experience</h3>
-
       <div class="flex flex-col gap-1">
         <label for="company_name" class="font-medium text-gray-700 ">Company Name</label>
         <input type="text"  placeholder="Company name" class=" company_name border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none" />
@@ -47,6 +49,13 @@ function renderExperienceForm() {
 
     </div>
         `;
+        const closeExpForm = document.querySelectorAll(".close_exp_form")
+        closeExpForm.forEach((btn)=>{
+          btn.addEventListener("click" , (e)=>{
+             const expForm = e.target.closest(".exp_items")
+             expForm.classList.add("hidden")
+          })
+        })
   });
 }
 renderExperienceForm();
