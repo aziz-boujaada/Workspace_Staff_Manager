@@ -18,19 +18,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+
   </head>
   <body class="bg-slate-700">
     <main class="relative">
-      <!--side bar and rooms div-->
-      <div class="flex flex-col lg:flex-row gap-3">
-        <!--Side Bar unssigned workers-->
+      <div class="flex flex-col lg:flex-row gap-3 min-h-screen">
         <div
           id="side_bar"
-          class="bg-slate-50 sm:max-w-xl lg:w-[30%] max-h-[100vh] overflow-y-auto p-4 shadow-xl rounded-lg"
+          class="bg-gradient-to-br from-slate-50 to-gray-100 w-full lg:w-[25%] max-h-[100vh] overflow-y-auto p-4 shadow-xl rounded-lg"
         >
           <div>
             <h1
-              class="text-blue-700 text-2xl text-center font-semibold font-sans"
+              class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 text-2xl text-center font-semibold font-sans"
             >
               Workspace Staff Manager
             </h1>
@@ -38,12 +37,12 @@
           <div id="unssigned_workers"></div>
           <button
             id="open_Modal"
-            class="text-center w-full my-4 mx-auto bg-blue-700 px-3 py-2 border-none rounded-md shadow-md text-white font-sans font-semibold hover:bg-blue-500 transition-all"
+            class="text-center w-full my-4 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-2 border-none rounded-md shadow-md text-white font-sans font-semibold hover:from-purple-500 hover:to-pink-500 transition-all"
           >
             Add Worker +
           </button>
         </div>
-        <!--Form Modal-->
+
         <div
           id="form_modal"
           class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden"
@@ -61,7 +60,7 @@
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
-            <h2 class="text-2xl font-semibold text-blue-700 text-center mb-3">
+            <h2 class="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 text-center mb-3">
               Add New Worker
             </h2>
 
@@ -73,7 +72,7 @@
                 type="text"
                 id="worker-name"
                 placeholder="Enter worker name"
-                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+                class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               />
               <div id="worker-name-error" class="error hidden"></div>
             </div>
@@ -82,7 +81,7 @@
               <label for="role" class="font-medium text-gray-700">Role</label>
               <select
                 id="role"
-                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+                class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               >
                 <option value="reception">Reception</option>
                 <option value="it Guy">IT Guy</option>
@@ -101,7 +100,7 @@
                 type="url"
                 id="img-url"
                 placeholder="image url"
-                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+                class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               />
               <div id="img-url-error" class="error hidden"></div>
             </div>
@@ -111,7 +110,7 @@
                 type="email"
                 id="worker-email"
                 placeholder="example@mail.com"
-                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+                class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               />
               <div id="worker-email-error" class="error hidden"></div>
             </div>
@@ -123,18 +122,17 @@
                 type="text"
                 id="worker-phone"
                 placeholder="+212612345678"
-                class="border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-600 outline-none"
+                class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               />
               <div id="worker-phone-error" class="error hidden"></div>
             </div>
 
-            <!--experience form-->
             <div id="expForm"></div>
 
             <button
               type="button"
               id="add_exp"
-              class="mt-4 w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-500 transition"
+              class="mt-4 w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 rounded-md hover:from-purple-500 hover:to-pink-500 transition"
             >
               + Add experience
             </button>
@@ -149,145 +147,150 @@
               </button>
               <button
                 id="save_worker"
-                class="px-4 py-2 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-600 transition"
+                class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-md hover:from-purple-500 hover:to-pink-500 transition"
               >
                 Save Worker
               </button>
             </div>
           </form>
         </div>
-        <!--rooms / zone image-->
+
         <div
           id="all_rooms"
-          class="image_zones bg-[url('/assets/images/image.jpg')] bg-cover bg-no-repeat bg-center h-[100vh] w-full"
+          class="w-full lg:w-[100%] p-4 overflow-y-auto max-h-[100vh]"
         >
-          <!-- rooms -->
-          <div id="rooms" class="gap-x-10 h-screen">
+          <div id="rooms" class="h-full">
             <div
               id="conference_room"
-              class="room w-full h-[200px] rounded-lg relative"
+              class="room bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="conferenceRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-1/2 text-center"
+                class="bg-white text-blue-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Conference Room<i class="fa-solid fa-users pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute top-4 right-4 bg-white text-blue-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
+
             <div class="emptyDiv1"></div>
+
             <div
               id=" serveur_room"
-              class="room w-full h-[250px] rounded-lg relative"
+              class="room bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="serverRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+                class="bg-white text-purple-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Serveur Room<i class="fa-solid fa-server pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute  top-4 right-4 lg:bottom-1 left-1 bg-white text-purple-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-purple-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
-            <div class="emptyDiv2"></div>
 
             <div
               id="securete_room"
-              class="room w-full h-[250px] rounded-lg relative"
+              class="room bg-gradient-to-br from-red-400 to-red-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="securityRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+                class="bg-white text-red-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Securete Room<i class="fa-solid fa-shield-halved pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute top-4 right-4 lg:bottom-1 left-1 bg-white text-red-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
+
+            <div class="emptyDiv2"></div>
             <div class="emptyDiv3"></div>
+            <div class="emptyDiv4"></div>
+
             <div
               id="reception_room"
-              class="room w-full h-[100%] rounded-lg relative"
+              class="room bg-gradient-to-br from-green-400 to-green-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="receptionRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-1/2 text-center"
+                class="bg-white text-green-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Reception Room<i class="fa-solid fa-door-open pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute top-4 right-4 bg-white text-green-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-green-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
-            <div class="emptyDiv4 h-[250px]"></div>
-            <div class="emptyDiv5 h-[250px]"></div>
+
+            <div class="emptyDiv5"></div>
+
             <div
               id="personell_room"
-              class="room w-full rounded-lg relative"
+              class="room bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="personnalRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+                class="bg-white text-orange-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Personell Room<i class="fa-solid fa-user-tie pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute top-4 right-4 lg:bottom-1 left-1 bg-white text-orange-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
+
             <div
               id="archives_room"
-              class="room w-full h-[100%] rounded-lg relative"
+              class="room bg-gradient-to-br from-teal-400 to-teal-600 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow relative"
               data-roomId="archiviesRoom"
             >
               <h3
-                class="bg-blue-600 text-white p-0.5 rounded-full w-full text-center"
+                class="bg-white text-teal-700 p-2 rounded-lg font-semibold text-center mb-2"
               >
                 Archives Room<i class="fa-solid fa-archive pl-2"></i>
               </h3>
               <button
-                class="assign_btn absolute bottom-4 right-10 bg-blue-500 font-bold text-white p-1 rounded-full w-8 h-8 text-center"
+                class="assign_btn absolute  top-4 right-4 lg:bottom-1 left-1 bg-white text-teal-600 font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-teal-100 transition shadow-md"
               >
                 +
               </button>
-              <div class="room_assigned"></div>
+              <div class="room_assigned mt-4"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!--display worker information modal -->
       <div
         id="worker_info_modal"
         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden"
       ></div>
 
       <div
-        class="assing_box bg-white w-[95%] sm:w-[500px] max-h-[85vh] overflow-y-auto rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-sans hidden"
+        class="assing_box bg-white w-[95%] sm:w-[500px] max-h-[85vh] overflow-y-auto rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-sans hidden z-50"
       >
         <div
           class="modal_workers_header flex items-center justify-between mb-4"
         >
-          <h3 class="text-xl font-semibold text-blue-800">Available Workers</h3>
+          <h3 class="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Available Workers</h3>
           <button
             id="close_assign_modal"
             type="button"

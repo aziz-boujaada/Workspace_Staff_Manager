@@ -7,33 +7,88 @@ button {
     color: white;
 }
 
-#rooms {
+  @media (min-width: 1024px) {
+        #rooms {
+          display: grid;
+          gap: 0.5rem;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-areas:
+            "conference_room conference_room empty_div1 serveur_room securete_room"
+            "reception_room reception_room empty_div2 empty_div3 empty_div4"
+            "reception_room reception_room empty_div5 personell_room archives_room";
+        }
 
+        #conference_room {
+          grid-area: conference_room;
+        }
 
+        #serveur_room {
+          grid-area: serveur_room;
+        }
 
-    display: grid;
-   
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
-    grid-template-rows: 1fr 2fr;
-    grid-template-areas:
-        "conference_room conference_room empty_div1 serveur_room securete_room"
-        "reception_room reception_room empty_div2  empty_div3  empty_div4  "
-        "reception_room reception_room div personell_room  archives_room ";
-}
+        #securete_room {
+          grid-area: securete_room;
+        }
 
-#conference_room { grid-area: conference_room;   }
-#serveur_room {grid-area: serveur_room;}
-#securete_room { grid-area: securete_room; }
-#reception_room { grid-area: reception_room; }
-#personell_room { grid-area: personell_room; }
-#archives_room { grid-area: archives_room; ; }
-.empty_div1 { grid-area: empty_div1 ;}
-.empty_div2 { grid-area: empty_div2 ;}
-.empty_div3 { grid-area: empty_div3 ;}
-.empty_div4 { grid-area: empty_div4 ;}
-.empty_div5 { grid-area: empty_div5 ;}
+        #reception_room {
+          grid-area: reception_room;
+        }
 
-.error{
+        #personell_room {
+          grid-area: personell_room;
+        }
+
+        #archives_room {
+          grid-area: archives_room;
+        }
+
+        .emptyDiv1 {
+          grid-area: empty_div1;
+        }
+
+        .emptyDiv2 {
+          grid-area: empty_div2;
+        }
+
+        .emptyDiv3 {
+          grid-area: empty_div3;
+        }
+
+        .emptyDiv4 {
+          grid-area: empty_div4;
+        }
+
+        .emptyDiv5 {
+          grid-area: empty_div5;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #rooms {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        
+        .emptyDiv1, .emptyDiv2, .emptyDiv3, .emptyDiv4, .emptyDiv5 {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767px) {
+        #rooms {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        
+        .emptyDiv1, .emptyDiv2, .emptyDiv3, .emptyDiv4, .emptyDiv5 {
+          display: none;
+        }
+      }
+
+.error {
     font-size: 12px;
     color: red;
 }

@@ -52,26 +52,55 @@ function validateField(field, value) {
 
 function validateForm() {
   let isValid = true;
+  
   for (const field in validationRules) {
     const inputField = document.getElementById(field);
     if (inputField && !validateField(field, inputField.value)) {
       isValid = false;
     }
   }
- const fromDate = document.querySelector(".form_date");
+
+  const fromDate = document.querySelector(".form_date");
   const toDate = document.querySelector(".to_date");
+  const fromDateError = document.querySelector(".from-date-error");
+  const toDateError = document.querySelector(".to-date-error");
 
-  if (fromDate && toDate) {
-    const startValue = new Date(fromDate.value);
-    const endValue = new Date(toDate.value);
-
-    if (fromDate.value && toDate.value && endValue <= startValue) {
-      toggleError("to-date", true, "End date must be greater than start date.");
+  if (fromDate && toDate && fromDateError && toDateError) {
+    if (!fromDate.value) {
+      fromDateError.textContent = "Start date is required.";
+      fromDateError.classList.remove("hidden");
+      fromDate.classList.add("border-red-500");
       isValid = false;
     } else {
-      toggleError("to-date", false);
+      fromDateError.textContent = "";
+      fromDateError.classList.add("hidden");
+      fromDate.classList.remove("border-red-500");
+    }
+
+    if (!toDate.value) {
+      toDateError.textContent = "End date is required.";
+      toDateError.classList.remove("hidden");
+      toDate.classList.add("border-red-500");
+      isValid = false;
+    } else if (fromDate.value && toDate.value) {
+      const startValue = new Date(fromDate.value);
+      const endValue = new Date(toDate.value);
+
+      if (endValue <= startValue) {
+        toDateError.textContent = "End date must be greater than start date.";
+        toDateError.classList.remove("hidden");
+        toDate.classList.add("border-red-500");
+        isValid = false;
+      } else {
+        toDateError.textContent = "";
+        toDateError.classList.add("hidden");
+        toDate.classList.remove("border-red-500");
+        toDate.classList.add("border-green-500");
+      }
     }
   }
-  return isValid
+
+  return isValid;
 }
+
 export { validateForm };

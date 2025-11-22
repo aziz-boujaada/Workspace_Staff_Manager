@@ -73,7 +73,7 @@ function getExperiences(){
   for(let expVal of expValues){
     const companyName = expVal.querySelector(".company_name").value
     const expRole = expVal.querySelector(".exp_role").value;
-    const fromDate = expVal.querySelector(".from_date").value;
+    const fromDate = expVal.querySelector(".form_date").value;
     const ToDate = expVal.querySelector(".to_date").value;
     const ExperienceData = {
       companyName , 
