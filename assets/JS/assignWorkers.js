@@ -84,7 +84,7 @@ function assignWorkers() {
         room.Workers.push(worker);
       }
     });
-    console.log(`${room.roomName}:`, room.Workers);
+    
   });
 
   const assignBtn = document.querySelectorAll(".assign_btn");
@@ -135,7 +135,7 @@ function assignWorkers() {
     });
   }
 
-  function displayInRoom(allowedWorkers, roomId, selectedRoom, modalContainer) {
+  function displayInRoom(allowedWorkers, roomId, selectedRoom) {
     const cards = document.querySelectorAll(".accepted_worker_card");
 
     cards.forEach((card) => {
@@ -218,7 +218,7 @@ function assignWorkers() {
     `;
     availableWorkerModal.appendChild(newCard);
 
-    console.log("Worker removed and re-added to available list");
+    
   }
 }
 
