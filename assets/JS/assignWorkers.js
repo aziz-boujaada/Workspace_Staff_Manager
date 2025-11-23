@@ -22,6 +22,7 @@ function assignWorkers() {
         roles.cleaning,
         roles.manager,
         roles.reception,
+        roles.other,
       ],
     },
     {
@@ -67,7 +68,7 @@ function assignWorkers() {
         roles.itGuy,
         roles.reception,
         roles.other,
-        roles.security
+        roles.security,
       ],
     },
   ];
@@ -84,7 +85,6 @@ function assignWorkers() {
         room.Workers.push(worker);
       }
     });
-    
   });
 
   const assignBtn = document.querySelectorAll(".assign_btn");
@@ -139,7 +139,7 @@ function assignWorkers() {
     const cards = document.querySelectorAll(".accepted_worker_card");
 
     cards.forEach((card) => {
-      card.addEventListener("click", () => {
+      card.addEventListener("click", (e) => {
         const workerId = card.getAttribute("data-workerId");
         const worker = allowedWorkers.find((w) => w.id == workerId);
 
@@ -164,20 +164,40 @@ function assignWorkers() {
         }
 
         worker.isAssigned = true;
-        addWorkerToRoom(worker, roomContainer);
         card.remove();
-
         const workerCard = document.querySelector(
           `.worker_card[data-id="${worker.id}"]`
         );
         if (workerCard) workerCard.classList.add("hidden");
+
+        addWorkerToRoom(worker, roomContainer, roomId);
+        UpdateRedZone(roomContainer, roomId);
       });
     });
   }
 
-  function addWorkerToRoom(worker, roomContainer) {
+  function UpdateRedZone(roomContainer, roomId) {
+    const redZone = document.querySelector(
+      `.room[data-roomId="${roomId}"] .not_accsess_room`
+    );
+    const assignedWorkersCount =
+      roomContainer.querySelectorAll(".assigned_worker").length;
+    console.log("assignedWorkersCount", assignedWorkersCount);
+   
+      if (assignedWorkersCount > 0) {
+        redZone.classList.add("hidden");
+        console.log("red zone hidden");
+      } else {
+        redZone.classList.remove("hidden");
+        console.log("red zone visible");
+      }
+    
+    // addWorkerToRoom(roomContainer , roomId)
+  }
+  function addWorkerToRoom(worker, roomContainer, roomId) {
     const workerDiv = document.createElement("div");
-    workerDiv.className = "assigned_worker flex items-center justify-between w-[90%] mb-1 bg-gray-200 p-1 rounded-md";
+    workerDiv.className =
+      "assigned_worker flex items-center justify-between w-[90%] mb-1 bg-gray-200 p-1 rounded-md";
     workerDiv.setAttribute("data-card", worker.id);
     workerDiv.innerHTML = `
       <div>
@@ -192,22 +212,27 @@ function assignWorkers() {
 
     const removeBtn = workerDiv.querySelector(".remove_from_room");
     removeBtn.addEventListener("click", () => {
-      removeWorkerFromRoom(worker, workerDiv);
+      removeWorkerFromRoom(worker, workerDiv, roomContainer, roomId);
+      UpdateRedZone(roomContainer, roomId);
+      console.log(roomContainer);
     });
   }
 
-  function removeWorkerFromRoom(worker, workerDiv) {
+  function removeWorkerFromRoom(worker, workerDiv, roomContainer, roomId) {
     workerDiv.remove();
     worker.isAssigned = false;
-
+    UpdateRedZone(roomContainer, roomId);
     const workerCard = document.querySelector(
       `.worker_card[data-id="${worker.id}"]`
     );
     if (workerCard) workerCard.classList.remove("hidden");
 
-    const availableWorkerModal = document.getElementById("aviable_worker_modal");
+    const availableWorkerModal = document.getElementById(
+      "aviable_worker_modal"
+    );
     const newCard = document.createElement("div");
-    newCard.className = "accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md";
+    newCard.className =
+      "accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md";
     newCard.setAttribute("data-workerId", worker.id);
     newCard.innerHTML = `
       <div>
@@ -217,8 +242,6 @@ function assignWorkers() {
       <img src="${worker.img}" alt="${worker.workerName}" class="h-12 w-12 rounded-full border-4 border-blue-500 object-cover shadow-md">
     `;
     availableWorkerModal.appendChild(newCard);
-
-    
   }
 }
 

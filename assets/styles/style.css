@@ -93,6 +93,13 @@ button {
     color: red;
 }
 
-/* .hidden_modal{
-    display: none;
-} */
+.not_accsess_room::before{
+   content: "";
+   background-color: rgba(255, 10, 10, 0.2);
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+  
+}
