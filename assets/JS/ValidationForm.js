@@ -5,10 +5,10 @@ const validationRules = {
       "Worker name must be 2–50 characters long and contain only letters.",
   },
 
-  "img-url": {
-    regex: /^https?:\/\/.+\..+$/i,
-    message: "Please enter a valid image URL.",
-  },
+  // "img-url": {
+  //   regex: /^https?:\/\/.+\..+$/i,
+  //   message: "Please enter a valid image URL.",
+  // },
 
   "worker-email": {
     regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,

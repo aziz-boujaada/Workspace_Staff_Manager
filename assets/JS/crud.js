@@ -27,7 +27,7 @@ function renderWorkerInfo(workers){
   unssignedWorkersZone.innerHTML = ""
   for(let worker of workers){unssignedWorkersZone.innerHTML += `
      <div id = "" class="worker_card flex item-center justify-around bg-gray-200 p-2 rounded-md my-3 listing" data-id="${worker.id}">
-     <img src = ${worker.img} alt ="${worker.workerName}image" class="h-12 w-12 rounded-full">
+     <img src = ${worker.img } alt ="${worker.workerName}image" class="h-12 w-12 rounded-full">
      <div>
      <h2>${worker.workerName}</h2>
      <p>${worker.role}</p>

@@ -37,9 +37,16 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
   //worker info
   const workerName = document.getElementById("worker-name").value;
   const role = document.getElementById("role").value;
-  const imageUrl = document.getElementById("img-url").value;
+  let imageUrl = document.getElementById("img-url").value;
   const email = document.getElementById("worker-email").value;
   const phone = document.getElementById("worker-phone").value;
+
+  const defualtPic = "/assets/images/defultPic.png"
+  if(!imageUrl || imageUrl === ""){
+    imageUrl =  defualtPic
+  }
+
+
   const workerInfo = {
     id : new Date().getTime().toString(),
     workerName: workerName,
@@ -50,7 +57,6 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
     experiences : getExperiences() ,
     isAssingend : false,
   };
-  
   
     
     

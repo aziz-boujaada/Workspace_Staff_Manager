@@ -95,7 +95,7 @@ button {
 
 .not_accsess_room::before{
    content: "";
-   background-color: rgba(255, 10, 10, 0.2);
+   background-color: rgba(255, 10, 10, 0.6);
    position: absolute;
    top: 0;
    left: 0;
