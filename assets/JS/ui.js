@@ -82,10 +82,13 @@ function renderWorkerModal() {
   </div>
   <div class="flex items-center justify-between mb-6">
     <div class="">
-      <p class="text-lg font-semibold text-gray-800 mb-1">${worker.workerName}</p>
+      <p class="text-lg font-semibold text-green-800 mb-1">${worker.workerName}</p>
       <p class="text-gray-600">${worker.role}</p>
+      <p class="text-gray-600  mb-1">${worker.email}</p>
+      <p class="text-gray-600">${worker.phone}</p>
     </div>
     <img src="${worker.img}" alt="${worker.workerName}" class="h-24 w-24 rounded-full border-4 border-green-400 object-cover shadow-md">
+
   </div>
   <h3 class="mt-4 mb-3 font-bold text-gray-700 text-right border-b border-gray-200 pb-1">Experiences</h3>
   <div class="space-y-3">

@@ -3,6 +3,11 @@ import { addWorker , renderWorkerInfo , loadWorkers } from "./crud.js";
 import { clearForm ,renderExperienceForm, renderWorkerModal  } from "./ui.js";
 import { validateForm } from "./ValidationForm.js";
 import { assignWorkers } from "./assignWorkers.js";
+document.addEventListener("DOMContentLoaded",()=>{
+  const loadedWorkers = loadWorkers()
+  renderWorkerInfo(loadedWorkers)
+     renderWorkerModal()
+     assignWorkers()
 // open and close modal of add new worker
 const openMoadlBtn = document.getElementById("open_Modal");
 const closeModalBtn = document.getElementById("close_modal");
@@ -24,12 +29,7 @@ OpenModal()
 closeModal()
 //add new worker
 
-document.addEventListener("DOMContentLoaded",()=>{
-  const loadedWorkers = loadWorkers()
-  renderWorkerInfo(loadedWorkers)
-     renderWorkerModal()
-     assignWorkers()
-})
+
 //save worker 
 const saveWorkerBtn = document.getElementById("save_worker")
 saveWorkerBtn.addEventListener("click" , (e)=>{
@@ -41,7 +41,7 @@ saveWorkerBtn.addEventListener("click" , (e)=>{
   const email = document.getElementById("worker-email").value;
   const phone = document.getElementById("worker-phone").value;
 
-  const defualtPic = "/assets/images/defultPic.png"
+  const defualtPic = "./assets/images/defultPic.png"
   if(!imageUrl || imageUrl === ""){
     imageUrl =  defualtPic
   }
@@ -92,4 +92,5 @@ function getExperiences(){
 }
 return expArray
 }
+})
 
