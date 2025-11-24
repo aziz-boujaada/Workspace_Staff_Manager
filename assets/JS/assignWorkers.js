@@ -122,6 +122,9 @@ function assignWorkers() {
     });
 
   function renderAllowedWorkers(allowedWorkers, container) {
+    if(allowedWorkers.length === 0){
+      container.innerHTML = `<p class="text-center text-red-600 font-sans">no aviable workers</p>`
+    }
     allowedWorkers.forEach((worker) => {
       container.innerHTML += `
         <div class="accepted_worker_card flex items-center justify-between mb-6 bg-gray-200 p-1 rounded-md" data-workerId="${worker.id}">
@@ -180,10 +183,11 @@ function assignWorkers() {
     const redZone = document.querySelector(
       `.room[data-roomId="${roomId}"] .not_accsess_room`
     );
+    console.log("room id" , roomId)
     const assignedWorkersCount =
       roomContainer.querySelectorAll(".assigned_worker").length;
     console.log("assignedWorkersCount", assignedWorkersCount);
-   
+      if(!redZone)return
       if (assignedWorkersCount > 0) {
         redZone.classList.add("hidden");
         console.log("red zone hidden");

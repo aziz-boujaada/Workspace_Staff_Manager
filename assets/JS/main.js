@@ -6,6 +6,7 @@ import { assignWorkers } from "./assignWorkers.js";
 document.addEventListener("DOMContentLoaded",()=>{
   const loadedWorkers = loadWorkers()
   renderWorkerInfo(loadedWorkers)
+})
      renderWorkerModal()
      assignWorkers()
 // open and close modal of add new worker
@@ -92,5 +93,5 @@ function getExperiences(){
 }
 return expArray
 }
-})
+
 
